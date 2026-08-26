@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>モテ度診断</title>
 </head>
+
 <body>
-    {% for question in questions %}
+
+{% for question in questions %}
 
     {% ifchanged question.category %}
-    <h2>{{ question.get_category_display }}</h2>
+        <h2>{{ question.get_category_display }}</h2>
     {% endifchanged %}
-    
+
     <h3>
         Q{{ question.order }}. {{ question.text }}
     </h3>
@@ -23,8 +25,16 @@
                 name="question_{{ question.id }}"
                 value="{{ choice.points }}"
             >
+
+            {% if choice.order == 1 %}A{% endif %}
+            {% if choice.order == 2 %}B{% endif %}
+            {% if choice.order == 3 %}C{% endif %}
+            {% if choice.order == 4 %}D{% endif %}
+
             {{ choice.text }}
         </label>
+
+        <br>
     {% endfor %}
 
 {% endfor %}
