@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>モテ度診断結果</title>
+</head>
+<body>
+    <h1>診断結果</h1>
+
+<h2>{{ points }}点</h2>
+
+{% if points >= 15 %}
+    <p>あなたのモテ度は90%！</p>
+{% elif points >= 10 %}
+    <p>あなたのモテ度は70%！</p>
+{% elif points >= 5 %}
+    <p>あなたのモテ度は50%！</p>
+{% else %}
+    <p>あなたのモテ度は30%！</p>
+{% endif %}
+
+<div>
+    <a href="{% url 'index' %}">一覧ページに戻る</a>
+</div>
+</body>
+</html>

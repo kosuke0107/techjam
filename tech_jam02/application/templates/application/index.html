@@ -337,20 +337,17 @@
     </style>
 </head>
 <body>
-<<<<<<< Updated upstream
-    <h1>hello hello</h1>
-    <h1>こんにちは</h1>
-=======
       <!-- スタート画面 -->
   <section class="screen active" id="screen-start">
     <p class="eyebrow">LOVE POTENTIAL CHECK</p>
     <h1 class="title-main">あなたの<span>モテ度</span><br>診断してみよう</h1>
 
     <div class="cta-area">
-      <button class="btn-primary" onclick="startQuiz()">診断を始める</button>
+        <a href="{% url 'ex' %}">
+            <button class="btn-primary" onclick="startQuiz()">診断を始める</button>
+        </a>
       <p class="meta-note">直感でこたえてね</p>
     </div>
   </section>
->>>>>>> Stashed changes
 </body>
 </html>

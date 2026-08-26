@@ -51,9 +51,23 @@
         const nextButton = document.getElementById("nextButton");
     
         let currentQuestion = 0;
+
+        let totalPoints = 0;
     
         nextButton.addEventListener("click", function() {
     
+
+            const selected = questions[currentQuestion].querySelector(
+                'input[type="radio"]:checked'
+            );
+
+            if (!selected) {
+                alert("回答を選択してください");
+                return;
+            }
+
+            totalPoints += Number(selected.value);
+            
             // 現在の問題を非表示
             questions[currentQuestion].style.display = "none";
     
@@ -65,14 +79,14 @@
                 questions[currentQuestion].style.display = "block";
             }
     
-            // 最後の問題ならボタンを変更
+            // 最後の問題ならボタンを結果にする
             if (currentQuestion === questions.length - 1) {
                 nextButton.textContent = "結果";
             }
     
-            // 最後まで行ったらボタンを消す
+            // 結果ページに飛ぶ
             if (currentQuestion >= questions.length) {
-                nextButton.style.display = "none";
+                window.location.href = "/application/result/?points=" + totalPoints;
             }
         });
     </script>
