@@ -4,3 +4,12 @@ urlpatterns = [
     path("",views.index, name='index'),
     path("ex/",views.ex, name="ex")
 ]
+
+
+
+
+
+
+
+
+#テスト
