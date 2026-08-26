@@ -7,37 +7,74 @@
 </head>
 
 <body>
+    
+    <div id="quiz-container">
 
-{% for question in questions %}
-
-    {% ifchanged question.category %}
-        <h2>{{ question.get_category_display }}</h2>
-    {% endifchanged %}
-
-    <h3>
-        Q{{ question.order }}. {{ question.text }}
-    </h3>
-
-    {% for choice in question.choices.all %}
-        <label>
-            <input
-                type="radio"
-                name="question_{{ question.id }}"
-                value="{{ choice.points }}"
-            >
-
-            {% if choice.order == 1 %}A{% endif %}
-            {% if choice.order == 2 %}B{% endif %}
-            {% if choice.order == 3 %}C{% endif %}
-            {% if choice.order == 4 %}D{% endif %}
-
-            {{ choice.text }}
-        </label>
-
-        <br>
-    {% endfor %}
-
-{% endfor %}
-
+        {% for question in questions %}
+        <div class="question" {% if not forloop.first %}style="display:none;"{% endif %}>
+    
+            {% ifchanged question.category %}
+                <h2>{{ question.get_category_display }}</h2>
+            {% endifchanged %}
+    
+            <h3>
+                Q{{ question.order }}. {{ question.text }}
+            </h3>
+    
+            {% for choice in question.choices.all %}
+                <label>
+                    <input
+                        type="radio"
+                        name="question_{{ question.id }}"
+                        value="{{ choice.points }}"
+                    >
+    
+                    {% if choice.order == 1 %}A{% endif %}
+                    {% if choice.order == 2 %}B{% endif %}
+                    {% if choice.order == 3 %}C{% endif %}
+                    {% if choice.order == 4 %}D{% endif %}
+    
+                    {{ choice.text }}
+                </label>
+                <br>
+            {% endfor %}
+    
+        </div>
+        {% endfor %}
+    
+    </div>
+    
+    <button type="button" id="nextButton">次へ</button>
+    
+    <script>
+        const questions = document.querySelectorAll(".question");
+        const nextButton = document.getElementById("nextButton");
+    
+        let currentQuestion = 0;
+    
+        nextButton.addEventListener("click", function() {
+    
+            // 現在の問題を非表示
+            questions[currentQuestion].style.display = "none";
+    
+            // 次の問題へ
+            currentQuestion++;
+    
+            // 次の問題を表示
+            if (currentQuestion < questions.length) {
+                questions[currentQuestion].style.display = "block";
+            }
+    
+            // 最後の問題ならボタンを変更
+            if (currentQuestion === questions.length - 1) {
+                nextButton.textContent = "終了";
+            }
+    
+            // 最後まで行ったらボタンを消す
+            if (currentQuestion >= questions.length) {
+                nextButton.style.display = "none";
+            }
+        });
+    </script>
 </body>
 </html>
