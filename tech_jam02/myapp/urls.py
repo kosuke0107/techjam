@@ -17,9 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from application import views
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path("application/",include("application.urls")),
     path('admin/', admin.site.urls),
-    path("result/",views.result, name = "result")
+    path("result/",views.result, name = "result"),
+    path("",RedirectView.as_view(url="/application/")),
 ]
