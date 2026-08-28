@@ -1,5 +1,222 @@
 .question{
     text-align: center;
     font-size: 20px;
+<<<<<<< Updated upstream
     color: blue;
+=======
+    color: red;
+}
+
+/* =========================================================
+   モテ度診断 - ex.css
+   水色×白 / 丸みのあるやさしいトーン
+   ========================================================= */
+
+:root{
+  --blue-deep:  #39B4D9;
+  --blue-main:  #6FD3EC;
+  --blue-soft:  #B9E9F5;
+  --blue-pale:  #EAF8FC;
+  --pink:       #FFB2C6;
+  --pink-deep:  #FF8FA8;
+  --gold:       #FFCB61;
+  --ink:        #2B3A45;
+  --ink-soft:   #5C7480;
+  --white:      #FFFFFF;
+}
+
+*{ box-sizing:border-box; }
+
+html{
+  min-height:100%;
+  background:
+    radial-gradient(circle at 15% 8%,  #DFF6FC 0%, transparent 55%),
+    radial-gradient(circle at 90% 92%, #F3FCFE 0%, transparent 50%),
+    var(--blue-pale);
+}
+
+body{
+  max-width:390px;
+  margin:0 auto;
+  min-height:100vh;
+  position:relative;
+  background:var(--white);
+  box-shadow:0 0 60px -20px rgba(57,180,217,0.35);
+  font-family:'Zen Kaku Gothic New', sans-serif;
+  color:var(--ink);
+  padding:34px 22px 110px;
+}
+
+/* ---------- 質問カード全体 ---------- */
+#quiz-container{
+  display:flex;
+  flex-direction:column;
+}
+
+.question{
+  display:flex;
+  flex-direction:column;
+  animation:fadeIn .45s ease;
+}
+
+@keyframes fadeIn{
+  from{ opacity:0; transform:translateY(8px); }
+  to{   opacity:1; transform:translateY(0); }
+}
+
+/* カテゴリ見出し */
+.question h2{
+  font-size:12px;
+  letter-spacing:.14em;
+  font-weight:700;
+  color:var(--blue-deep);
+  text-align:center;
+  margin:0 0 18px;
+  padding-bottom:10px;
+  border-bottom:1.5px dashed var(--blue-soft);
+}
+
+/* 質問文(吹き出し風カード) */
+.question h3{
+  font-family:'Kiwi Maru', serif;
+  font-weight:500;
+  font-size:18px;
+  line-height:1.65;
+  margin:0 0 22px;
+  padding:20px 18px;
+  background:var(--blue-pale);
+  border:1.5px solid var(--blue-soft);
+  border-radius:20px;
+}
+
+/* ---------- 選択肢 ---------- */
+.question label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:15px 18px;
+  margin-bottom:12px;
+  border-radius:16px;
+  border:1.6px solid var(--blue-soft);
+  background:var(--white);
+  font-size:14.5px;
+  line-height:1.5;
+  color:var(--ink);
+  cursor:pointer;
+  transition:background .2s ease, border-color .2s ease, transform .12s ease;
+}
+
+.question label:hover{
+  border-color:var(--blue-deep);
+  background:var(--blue-pale);
+}
+
+.question label:active{
+  transform:scale(.98);
+}
+
+/* 選択中のラベルをハイライト(input:checkedをlabelで検知) */
+.question label:has(input:checked){
+  background:linear-gradient(120deg, var(--blue-main), var(--pink));
+  border-color:transparent;
+  color:var(--white);
+}
+
+.question label:has(input:checked) input{
+  border-color:var(--white);
+  background:var(--white);
+}
+
+.question label:has(input:checked) input::after{
+  background:var(--pink-deep);
+}
+
+/* ラジオボタンをカスタム円形に */
+.question input[type="radio"]{
+  appearance:none;
+  -webkit-appearance:none;
+  flex:0 0 auto;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  border:2px solid var(--blue-soft);
+  background:var(--white);
+  position:relative;
+  margin:0;
+  cursor:pointer;
+  transition:border-color .2s ease;
+}
+
+.question input[type="radio"]:checked{
+  border-color:var(--white);
+}
+
+.question input[type="radio"]::after{
+  content:"";
+  position:absolute;
+  inset:4px;
+  border-radius:50%;
+  background:transparent;
+  transition:background .15s ease;
+}
+
+.question input[type="radio"]:checked::after{
+  background:var(--blue-deep);
+}
+
+/* テンプレート内の <br> は不要なのでスペーシングに置き換え */
+.question br{
+  display:none;
+}
+
+/* ---------- 次へボタン ---------- */
+#nextButton{
+  position:sticky;
+  bottom:16px;
+  width:100%;
+  margin-top:24px;
+  padding:16px 18px;
+  border:none;
+  border-radius:999px;
+  font-family:inherit;
+  font-size:16px;
+  font-weight:700;
+  color:var(--white);
+  background:linear-gradient(120deg, var(--blue-deep), var(--pink-deep));
+  box-shadow:0 14px 26px -12px rgba(255,143,168,0.55);
+  cursor:pointer;
+  transition:transform .12s ease, box-shadow .2s ease;
+}
+
+#nextButton:hover{
+  box-shadow:0 18px 30px -12px rgba(255,143,168,0.7);
+}
+
+#nextButton:active{
+  transform:scale(.98);
+}
+
+#nextButton:focus-visible,
+.question label:focus-within{
+  outline:3px solid var(--gold);
+  outline-offset:2px;
+}
+
+/* ---------- アクセシビリティ配慮 ---------- */
+@media (prefers-reduced-motion: reduce){
+  *{
+    animation:none !important;
+    transition:none !important;
+  }
+}
+
+/* ---------- 画面が広いときはカードらしく角丸+余白 ---------- */
+@media (min-width:430px){
+  body{
+    margin:28px auto;
+    min-height:calc(100vh - 56px);
+    border-radius:38px;
+    overflow:hidden;
+  }
+>>>>>>> Stashed changes
 }

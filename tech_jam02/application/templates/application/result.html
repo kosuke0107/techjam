@@ -1,46 +1,61 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>モテ度診断結果</title>
+    <link rel="stylesheet" href="{% static 'application/result.css' %}">
 </head>
 <body>
-    <h1>診断結果</h1>
+<div class="result-page">
+    <h1 class="result-page__title">診断結果</h1>
+    <h2 class="points-label">{{ points }}点/20点</h2>
 
-<h2>{{ points }}点/20点</h2>
+    <!-- 得点の割合を透き通ったハートで表示(ビュー側の変更不要) -->
+    <div class="result-heart" style="--fill: {% widthratio points 20 100 %}%;">
+        <div class="result-heart__liquid"></div>
+        <div class="result-heart__percent">{% widthratio points 20 100 %}<small class="result-heart__percent-unit">%</small></div>
+    </div>
 
-{% if points >= 18 %}
-    <h2>あなたのモテ度は90%以上</h2>
+    {% if points >= 18 %}
+        <h2 class="result-page__tier-title">あなたのモテ度は90%以上</h2>
 
-    <p>相手への気遣い、会話力、清潔感、距離感、精神的な余裕。どれもかなり高レベルです。
-        一緒にいる相手に安心感を与えられるので、自然と「また会いたい」と思われるタイプ。
-        その余裕、かなり強いです。</p>
+        <p class=".result-page__tier-desc">相手への気遣い、会話力、清潔感、距離感、精神的な余裕。どれもかなり高レベルです。
+            一緒にいる相手に安心感を与えられるので、自然と「また会いたい」と思われるタイプ。
+            その余裕、かなり強いです。</p>
+    {% elif points >= 14 %}
+        <h2 class="result-page__tier-title">あなたのモテ度は70%~90%</h2>
 
-{% elif points >= 14 %}
-    <h2>あなたのモテ度は70%~90%</h2>
+        <P class=".result-page__tier-desc">相手のことを考えて行動できる、かなり好印象なタイプです。
+            コミュニケーションや身だしなみもしっかりしていて、大きな失敗は少なそう。
+            あと少し自信を持って積極的になれば、さらにモテ度アップ！</P>
 
-    <P>相手のことを考えて行動できる、かなり好印象なタイプです。
-        コミュニケーションや身だしなみもしっかりしていて、大きな失敗は少なそう。
-        あと少し自信を持って積極的になれば、さらにモテ度アップ！</P>
+    {% elif points >= 10 %}
+        <h2 class="result-page__tier-title">あなたのモテ度は50%~70%</h2>
 
-{% elif points >= 10 %}
-    <h2>あなたのモテ度は50%~70%</h2>
+        <p class=".result-page__tier-desc">基本的なところはできていますが、まだまだ伸びしろがあります。
+            相手の話をしっかり聞くこと、清潔感、そして焦らない余裕を意識してみましょう。
+            ちょっとした意識の変化で、かなり印象が変わるかも！</p>
 
-    <p>基本的なところはできていますが、まだまだ伸びしろがあります。
-        相手の話をしっかり聞くこと、清潔感、そして焦らない余裕を意識してみましょう。
-        ちょっとした意識の変化で、かなり印象が変わるかも！</p>
+    {% else %}
+        <h2 class="result-page__tier-title">あなたのモテ度は50%未満</h2>
 
-{% else %}
-    <h2>あなたのモテ度は50%未満</h2>
+        <p class=".result-page__tier-desc">モテないというより、まだ魅力の出し方を知らないだけかも。
+            特に「相手の話を聞く」「身だしなみを整える」「追いすぎない」の3つを意識してみましょう。
+            ここからの成長次第で、モテ度は大きく変わります！</p>
+    {% endif %}
 
-    <p>モテないというより、まだ魅力の出し方を知らないだけかも。
-        特に「相手の話を聞く」「身だしなみを整える」「追いすぎない」の3つを意識してみましょう。
-        ここからの成長次第で、モテ度は大きく変わります！</p>
-{% endif %}
-
-<div>
-    <a href="{% url 'index' %}">一覧ページに戻る</a>
+    <div>
+        <a href="{% url 'index' %}" class=".result-page__back-link">一覧ページに戻る</a>
+    </div>
 </div>
+<svg width="0" height="0" style="position:absolute">
+  <clipPath id="heartClip" clipPathUnits="objectBoundingBox">
+    <path d="M0.5,0.85 C0.2,0.62 0,0.38 0,0.25 C0,0.1 0.15,0 0.3,0 C0.42,0 0.5,0.09 0.5,0.2 C0.5,0.09 0.58,0 0.7,0 C0.85,0 1,0.1 1,0.25 C1,0.38 0.8,0.62 0.5,0.85 Z"/>
+  </clipPath>
+</svg>
+
 </body>
 </html>
