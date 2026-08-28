@@ -10,8 +10,11 @@
 </head>
 
 <body>
+
+    
     
     <div id="quiz-container">
+
 
         {% for question in questions %}
         <div class="question" {% if not forloop.first %}style="display:none;"{% endif %}>
@@ -24,7 +27,7 @@
                 Q{{ question.order }}. {{ question.text }}
             </h3>
     
-            {% for choice in question.choices.all %}
+            {% for choice in question.random_choices %}
                 <label>
                     <input
                         type="radio"
@@ -41,7 +44,8 @@
                 </label>
                 <br>
             {% endfor %}
-    
+
+            
         </div>
         {% endfor %}
     

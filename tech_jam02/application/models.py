@@ -25,7 +25,7 @@ class Choice(models.Model):
     question = models.ForeignKey(
         Question,
         on_delete=models.CASCADE,
-        related_name="choices"
+        related_name="choice"
     )
     text = models.TextField()
     points = models.IntegerField()
