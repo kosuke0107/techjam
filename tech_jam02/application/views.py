@@ -5,8 +5,17 @@ from .models import Question
 def index(request):
     return render(request,"application/index.html")
 
-def ex(request):
+def ex(request, category = None):
     questions = Question.objects.prefetch_related("choices").order_by("order")
+
+    if category:
+        questions = Question.objects.filter(
+            category=category
+        ).order_by("order")
+    else:
+        questions = Question.objects.all().order_by(
+            "category","order"
+        )
 
     return render(
         request,
