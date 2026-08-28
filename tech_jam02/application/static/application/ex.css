@@ -1,10 +1,7 @@
 .question{
     text-align: center;
     font-size: 20px;
-<<<<<<< Updated upstream
     color: blue;
-=======
-    color: red;
 }
 
 /* =========================================================
@@ -218,5 +215,4 @@ body{
     border-radius:38px;
     overflow:hidden;
   }
->>>>>>> Stashed changes
 }
