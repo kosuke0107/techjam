@@ -1,0 +1,213 @@
+:root {
+    --blue-deep: #39B4D9;
+    --blue-main: #6FD3EC;
+    --blue-soft: #B9E9F5;
+    --blue-pale: #EAF8FC;
+    --pink: #FFB2C6;
+    --pink-deep: #FF8FA8;
+    --ink: #2B3A45;
+    --ink-soft: #5C7480;
+    --white: #FFFFFF;
+    --shadow: 0 18px 40px -18px rgba(57, 180, 217, 0.45);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+body {
+    min-height: 100vh;
+    padding: 28px 16px;
+
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    color: var(--ink);
+
+    background:
+        radial-gradient(
+            circle at 15% 8%,
+            #DFF6FC 0%,
+            transparent 55%
+        ),
+        radial-gradient(
+            circle at 90% 92%,
+            #F3FCFE 0%,
+            transparent 50%
+        ),
+        var(--blue-pale);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow-x: hidden;
+}
+
+
+/* ---------- ページ全体 ---------- */
+
+.question-page {
+    width: 100%;
+    max-width: 390px;
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+
+
+/* ---------- タイトル ---------- */
+
+.question-page__title {
+    font-family: 'Kiwi Maru', serif;
+    font-size: 38px;
+    margin: 0 0 8px;
+
+    color: var(--ink);
+}
+
+
+.question-page__subtitle {
+    font-size: 14px;
+    color: var(--ink-soft);
+
+    margin: 0 0 28px;
+}
+
+
+/* ---------- 選択肢 ---------- */
+
+.question-page__options {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+.question-option {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    padding: 16px 18px;
+
+    border: 1.6px solid var(--blue-soft);
+    border-radius: 16px;
+
+    background: var(--white);
+
+    color: var(--ink);
+
+    text-decoration: none;
+
+    text-align: left;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        transform .12s ease,
+        box-shadow .2s ease;
+}
+
+
+/* 番号 */
+
+.question-option__number {
+    flex-shrink: 0;
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 12px;
+
+    border-radius: 50%;
+
+    background: var(--blue-soft);
+    color: var(--blue-deep);
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* 文字 */
+
+.question-option__text {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+/* ホバー */
+
+.question-option:hover {
+    background: var(--blue-pale);
+    border-color: var(--blue-deep);
+
+    box-shadow: 0 8px 20px -12px rgba(57, 180, 217, 0.5);
+
+    transform: translateY(-2px);
+}
+
+
+/* クリック */
+
+.question-option:active {
+    transform: scale(.98);
+}
+
+
+/* ---------- 下の説明 ---------- */
+
+.question-page__note {
+    font-size: 12px;
+
+    color: var(--ink-soft);
+
+    margin: 20px 0 0;
+}
+
+
+/* ---------- スマホ ---------- */
+
+@media screen and (max-width: 600px) {
+
+    body {
+        padding: 20px 16px;
+    }
+
+    .question-page {
+        width: 100%;
+        max-width: 390px;
+    }
+
+    .question-page__title {
+        font-size: 34px;
+    }
+
+    .question-option {
+        padding: 15px 16px;
+    }
+
+    .question-option__text {
+        font-size: 14px;
+    }
+}

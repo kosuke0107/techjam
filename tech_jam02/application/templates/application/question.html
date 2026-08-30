@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'application/question.css' %}">
+    <title>診断選択</title>
+</head>
+
+<body>
+
+<div class="question-page">
+
+    <h1 class="question-page__title">
+        診断を選択
+    </h1>
+
+    <p class="question-page__subtitle">
+        気になる診断を選んでね
+    </p>
+
+    <div class="question-page__options">
+
+        <a href="{% url 'quiz' 'communication' %}" class="question-option">
+            <span class="question-option__number">01</span>
+            <span class="question-option__text">
+                会話・コミュニケーション編
+            </span>
+        </a>
+
+        <a href="{% url 'quiz' 'cleanliness' %}" class="question-option">
+            <span class="question-option__number">02</span>
+            <span class="question-option__text">
+                清潔感・身だしなみ編
+            </span>
+        </a>
+
+        <a href="{% url 'quiz' 'date' %}" class="question-option">
+            <span class="question-option__number">03</span>
+            <span class="question-option__text">
+                デート・距離感編
+            </span>
+        </a>
+
+        <a href="{% url 'quiz' 'mental' %}" class="question-option">
+            <span class="question-option__number">04</span>
+            <span class="question-option__text">
+                メンタル・余裕編
+            </span>
+        </a>
+
+    </div>
+
+    <p class="question-page__note">
+        直感でこたえてね

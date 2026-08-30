@@ -11,7 +11,9 @@
 
 <body>
 
-    
+    <div id="message" class="message">
+        直感でひとつ選んでみよう ✨
+    </div>
     
     <div id="quiz-container">
 
@@ -19,9 +21,7 @@
         {% for question in questions %}
         <div class="question" {% if not forloop.first %}style="display:none;"{% endif %}>
     
-            {% ifchanged question.category %}
-                <h2>{{ question.get_category_display }}</h2>
-            {% endifchanged %}
+            <h2>{{ question.get_category_display }}</h2>
     
             <h3>
                 Q{{ question.order }}. {{ question.text }}
@@ -46,9 +46,11 @@
     
     </div>
     
-    <button type="button" id="nextButton">次へ</button>
-    <button type="button" id="backButton">戻る</button>
-    
+    <div class="button-area">
+        <button type="button" id="nextButton">次へ</button>
+        <button type="button" id="backButton">戻る</button>
+    </div>
+
     <script>
         const questions = document.querySelectorAll(".question");
         const nextButton = document.getElementById("nextButton");
@@ -65,8 +67,15 @@
                 'input[type="radio"]:checked'
             );
 
+            const message = document.getElementById("message");
+
             if (!selected) {
-                alert("回答を選択してください");
+                message.classList.add("show");
+
+                setTimeout(function() {
+                    message.classList.remove("show");
+                }, 2500);
+
                 return;
             }
 
@@ -92,11 +101,17 @@
     
             // 結果ページに飛ぶ
             if (currentQuestion >= questions.length) {
-                window.location.href = "/application/result/?points=" + totalPoints;
+                window.location.href = "/application/result/?points=" + totalPoints + "&category={{ category }}";
             }
         });
 
         backButton.addEventListener("click",function(){
+
+            if (currentQuestion === 0) {
+                window.location.href = "/application/";
+                return;
+            }
+
             if(currentQuestion > 0){
                 questions[currentQuestion].style.display = "none";
 

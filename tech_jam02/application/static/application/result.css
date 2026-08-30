@@ -11,120 +11,314 @@
       result.html では ex.css → result.css の順で読み込んでください
    ========================================================= */
 
-.result-page{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
+:root {
+    --blue-deep: #39B4D9;
+    --blue-main: #6FD3EC;
+    --blue-soft: #B9E9F5;
+    --blue-pale: #EAF8FC;
+    --pink: #FFB2C6;
+    --pink-deep: #FF8FA8;
+    --gold: #FFCB61;
+    --ink: #2B3A45;
+    --ink-soft: #5C7480;
+    --white: #FFFFFF;
+    --shadow: 0 18px 40px -18px rgba(57, 180, 217, 0.45);
 }
 
-/* 「診断結果」の見出し */
-.result-page__title{
-  font-family:'Kiwi Maru', serif;
-  font-size:22px;
-  margin:4px 0 22px;
-  color:var(--ink);
+* {
+    box-sizing: border-box;
 }
 
+html {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 28px 16px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    color: var(--ink);
+    background:
+        radial-gradient(
+            circle at 15% 8%,
+            #DFF6FC 0%,
+            transparent 55%
+        ),
+        radial-gradient(
+            circle at 90% 92%,
+            #F3FCFE 0%,
+            transparent 50%
+        ),
+        var(--blue-pale);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+.result-page {
+    width: 100%;
+    max-width: 390px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+
+  /* 「診断結果」の見出し */
+
+.result-page__title {
+    font-family: 'Kiwi Maru', serif;
+    font-size: 50px;
+    margin: 4px 0 0px;
+    color: var(--ink);
+}
+
+.result-page__category{
+  font-family: 'Kiwi Maru', serif;
+  font-size: 30px;
+  margin: 0px 0 5px;
+  color: var(--ink);
+}
 /* 「◯点 / 20点」の表示 */
-.result-page__points{
-  font-size:13px;
-  letter-spacing:.1em;
-  color:var(--ink-soft);
-  margin:0 0 10px;
+
+.result-page__points {
+    font-size: 25px;
+    letter-spacing: .1em;
+    color: var(--ink-soft);
+    margin: 0 0 10px;
 }
 
-/* ---------- 透き通ったハート型ゲージ ---------- */
-.result-heart{
-  position:relative;
-  width:200px;
-  height:184px;
-  margin:6px auto 26px;
-  clip-path:url(#heartClip);
-  background:linear-gradient(160deg, rgba(255,255,255,0.6), rgba(233,250,253,0.4));
-  box-shadow:
-    inset 0 0 0 1px rgba(57,180,217,0.3),
-    0 18px 34px -18px rgba(57,180,217,0.55);
-  backdrop-filter:blur(4px);
-  -webkit-backdrop-filter:blur(4px);
+  /* ---------- 透き通ったハート型ゲージ ---------- */
+
+.result-heart {
+    position: relative;
+    width: 200px;
+    height: 184px;
+    margin: 6px auto 26px;
+    clip-path: url(#heartClip);
+
+    /* 埋まっていない部分 */
+    background: #FFFFFF;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(57, 180, 217, 0.3),
+        0 18px 34px -18px rgba(57, 180, 217, 0.55);
+
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    overflow: hidden;
 }
 
-/* ハート内で得点分だけ満ちる液体 */
-.result-heart__liquid{
-  position:absolute;
-  left:0; right:0; bottom:0;
-  height:var(--fill, 0%);
-  background:linear-gradient(180deg, rgba(111,211,236,0.55), rgba(57,180,217,0.8));
-  transition:height 1.2s cubic-bezier(.22,.9,.32,1.1);
+  /* ハート内で得点分だけ満ちる液体 */
+.result-heart__liquid {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: var(--fill, 0%);
+    background: linear-gradient(
+        180deg,
+        rgba(255, 178, 198, 0.65),
+        rgba(255, 143, 168, 0.9)
+    );
+    transition:
+        height 1.2s cubic-bezier(.22, .9, .32, 1.1);
 }
 
-/* 液体の水面の波アニメーション */
-.result-heart__liquid::before{
-  content:"";
-  position:absolute;
-  top:-9px; left:0;
-  width:200%;
-  height:16px;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20'%3E%3Cpath d='M0 10 Q 25 0 50 10 T 100 10 T 150 10 T 200 10 V20 H0 Z' fill='%23ffffff' fill-opacity='0.6'/%3E%3C/svg%3E");
-  background-size:200px 16px;
-  background-repeat:repeat-x;
-  animation:waveMove 2.8s linear infinite;
+  /* 液体の水面の波アニメーション */
+.result-heart__liquid::before {
+    content: "";
+    position: absolute;
+    top: -9px;
+    left: 0;
+    width: 200%;
+    height: 16px;
+    background-image: url(
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20'%3E%3Cpath d='M0 10 Q 25 0 50 10 T 100 10 T 150 10 T 200 10 V20 H0 Z' fill='%23ffffff' fill-opacity='0.6'/%3E%3C/svg%3E"
+    );
+    background-size: 200px 16px;
+    background-repeat: repeat-x;
+    animation: waveMove 2.8s linear infinite;
+}
+
+@keyframes waveMove {
+
+    from {
+        background-position-x: 0;
+    }
+
+    to {
+        background-position-x: 200px;
+    }
 }
 
 /* ハート中央のパーセント数字 */
-.result-heart__percent{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-family:'Kiwi Maru', serif;
-  font-size:34px;
-  color:var(--ink);
-  text-shadow:0 1px 2px rgba(255,255,255,0.85);
+.result-heart__percent {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Kiwi Maru', serif;
+    font-size: 34px;
+    color: var(--ink);
+    text-shadow:
+        0 1px 2px rgba(255, 255, 255, 0.85);
+    z-index: 2;
 }
 
 /* パーセント数字の横の「%」 */
-.result-heart__percent-unit{
-  font-size:15px;
-  margin-left:2px;
-  font-family:'Zen Kaku Gothic New', sans-serif;
+.result-heart__percent-unit {
+    font-size: 15px;
+    margin-left: 2px;
+    font-family:
+        'Zen Kaku Gothic New',
+        sans-serif;
 }
 
-/* 診断タイプの見出し(例:「モテ度は90%以上」) */
-.result-page__tier-title{
-  font-family:'Kiwi Maru', serif;
-  font-size:19px;
-  margin:4px 0 14px;
-  color:var(--blue-deep);
+  /* 診断タイプの見出し(例:「モテ度は90%以上」) */
+.result-page__tier-title {
+    font-family: 'Kiwi Maru', serif;
+    font-size: 19px;
+    margin: 4px 0 14px;
+    color: var(--blue-deep);
 }
 
 /* 診断タイプの説明文 */
-.result-page__tier-desc{
-  font-size:14px;
-  line-height:1.85;
-  color:var(--ink-soft);
-  margin:0 0 30px;
+.result-page__tier-desc {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 18px 22px;
+    font-size: 15px;
+    line-height: 2;
+    color: var(--ink-soft);
+    text-align: left;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1.5px solid var(--blue-soft);
+    border-radius: 18px;
+    overflow-wrap: break-word;
+    word-break: normal;
 }
 
-/* 一覧ページに戻るリンク(ボタン風) */
-.result-page__back-link{
-  display:inline-block;
-  padding:14px 30px;
-  border-radius:999px;
-  border:1.6px solid var(--blue-deep);
-  color:var(--blue-deep);
-  text-decoration:none;
-  font-weight:700;
-  font-size:14.5px;
-  transition:background .2s ease;
+/* 一覧ボタン */
+.cta-area {
+    width: 100%;
+    max-width: 350px;
+    margin: 5px auto 0;
+    padding: 0;
 }
 
-.result-page__back-link:hover{
-  background:var(--blue-pale);
+.btn-primary {
+    display: block;
+    width: 100%;
+    padding: 13px 18px;
+    text-decoration: none;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    background: linear-gradient(
+        120deg,
+        var(--blue-deep),
+        var(--pink-deep)
+    );
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition:
+        opacity .2s ease,
+        transform .12s ease;
 }
 
-@media (prefers-reduced-motion: reduce){
-  .result-heart__liquid::before{ animation:none; }
-  .result-heart__liquid{ transition:none; }
+
+.btn-primary:hover {
+    opacity: .9;
+}
+
+
+.btn-primary:active {
+    transform: scale(.98);
+}
+
+/* スマホの時 */
+
+@media screen and (max-width: 600px) {
+
+    body {
+        width: 100%;
+        min-width: 0;
+        padding: 20px 12px;
+        overflow-x: hidden;
+    }
+
+
+    .result-page {
+        width: 100%;
+        max-width: 390px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    .result-page__title {
+        font-size: 42px;
+    }
+
+
+    .result-page__points {
+        font-size: 23px;
+    }
+
+
+    .result-heart {
+        width: 180px;
+        height: 166px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    .result-page__tier-desc {
+        width: 100%;
+        max-width: 350px;
+        padding: 16px 18px;
+        font-size: 14px;
+        line-height: 1.9;
+    }
+
+
+    .cta-area {
+        width: 100%;
+        max-width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    .btn-primary {
+        width: 100%;
+    }
+}
+
+/* アニメーション軽減 */
+@media (prefers-reduced-motion: reduce) {
+    .result-heart__liquid::before {
+        animation: none;
+    }
+    .result-heart__liquid {
+        transition: none;
+    }
+    .btn-primary {
+        transition: none;
+    }
 }

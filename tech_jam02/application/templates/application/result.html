@@ -5,13 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>モテ度診断結果</title>
     <link rel="stylesheet" href="{% static 'application/result.css' %}">
+    <title>モテ度診断結果</title>
 </head>
 <body>
 <div class="result-page">
     <h1 class="result-page__title">診断結果</h1>
-    <h2 class="points-label">{{ points }}点/20点</h2>
+    <h1 class="result-page__category">{{ category_name }}</h1>
+    <h2 class="result-page__points">{{ points }}点/20点</h2>
 
     <!-- 得点の割合を透き通ったハートで表示(ビュー側の変更不要) -->
     <div class="result-heart" style="--fill: {% widthratio points 20 100 %}%;">
@@ -19,36 +20,230 @@
         <div class="result-heart__percent">{% widthratio points 20 100 %}<small class="result-heart__percent-unit">%</small></div>
     </div>
 
-    {% if points >= 18 %}
-        <h2 class="result-page__tier-title">あなたのモテ度は90%以上</h2>
+    <!-- 会話・コミュニケーション編 -->
 
-        <p class=".result-page__tier-desc">相手への気遣い、会話力、清潔感、距離感、精神的な余裕。どれもかなり高レベルです。
-            一緒にいる相手に安心感を与えられるので、自然と「また会いたい」と思われるタイプ。
-            その余裕、かなり強いです。</p>
-    {% elif points >= 14 %}
-        <h2 class="result-page__tier-title">あなたのモテ度は70%~90%</h2>
+    {% if category == "communication" %}
 
-        <P class=".result-page__tier-desc">相手のことを考えて行動できる、かなり好印象なタイプです。
-            コミュニケーションや身だしなみもしっかりしていて、大きな失敗は少なそう。
-            あと少し自信を持って積極的になれば、さらにモテ度アップ！</P>
+        {% if points >= 18 %}
 
-    {% elif points >= 10 %}
-        <h2 class="result-page__tier-title">あなたのモテ度は50%~70%</h2>
+            <h2 class="result-page__tier-title">
+                会話力はかなり高め！
+            </h2>
 
-        <p class=".result-page__tier-desc">基本的なところはできていますが、まだまだ伸びしろがあります。
-            相手の話をしっかり聞くこと、清潔感、そして焦らない余裕を意識してみましょう。
-            ちょっとした意識の変化で、かなり印象が変わるかも！</p>
+            <p class="result-page__tier-desc">
+                相手の話をしっかり聞きながら、自然な会話ができるタイプです。
+                相手に安心感を与えられるので、一緒にいて楽しいと思われやすそう。
+                そのコミュニケーション力は大きな魅力です！
+            </p>
 
-    {% else %}
-        <h2 class="result-page__tier-title">あなたのモテ度は50%未満</h2>
+        {% elif points >= 14 %}
 
-        <p class=".result-page__tier-desc">モテないというより、まだ魅力の出し方を知らないだけかも。
-            特に「相手の話を聞く」「身だしなみを整える」「追いすぎない」の3つを意識してみましょう。
-            ここからの成長次第で、モテ度は大きく変わります！</p>
+            <h2 class="result-page__tier-title">
+                会話力はかなり好印象！
+            </h2>
+
+            <p class="result-page__tier-desc">
+                相手のことを考えながら会話できる、好印象なタイプです。
+                基本的なコミュニケーションもしっかりできています。
+                あとは少し自信を持って話せば、さらに魅力がアップしそう！
+            </p>
+
+        {% elif points >= 10 %}
+
+            <h2 class="result-page__tier-title">
+                会話力はまだまだ伸びしろあり！
+            </h2>
+
+            <p class="result-page__tier-desc">
+                基本的な会話はできています。
+                相手の話を最後まで聞くことや、相手に興味を持つことを意識すると、
+                もっと自然で楽しい会話ができるようになりそうです！
+            </p>
+
+        {% else %}
+
+            <h2 class="result-page__tier-title">
+                ここから会話力アップ！
+            </h2>
+
+            <p class="result-page__tier-desc">
+                まずは相手の話をしっかり聞くことから始めてみましょう。
+                無理に面白いことを言わなくても大丈夫。
+                相手に興味を持って話を聞くだけでも、印象は大きく変わります！
+            </p>
+
+        {% endif %}
+
+
+    <!-- 清潔感・身だしなみ編 -->
+
+    {% elif category == "cleanliness" %}
+
+        {% if points >= 18 %}
+
+            <h2 class="result-page__tier-title">
+                清潔感はかなり高レベル！
+            </h2>
+
+            <p class="result-page__tier-desc">
+                身だしなみや清潔感をしっかり意識できています。
+                第一印象でも好感を持たれやすいタイプです。
+                その丁寧さをこれからも維持していきましょう！
+            </p>
+
+        {% elif points >= 14 %}
+
+            <h2 class="result-page__tier-title">
+                清潔感はかなり好印象！
+            </h2>
+
+            <p class="result-page__tier-desc">
+                基本的な身だしなみはしっかりできています。
+                服装や髪型など、細かい部分を少し意識すると、
+                さらに好印象につながりそうです！
+            </p>
+
+        {% elif points >= 10 %}
+
+            <h2 class="result-page__tier-title">
+                清潔感はまだまだ伸びしろあり！
+            </h2>
+
+            <p class="result-page__tier-desc">
+                基本的なところはできています。
+                髪型、服装、肌、爪など、普段あまり意識しない部分を
+                少し見直してみると、印象がさらに良くなりそうです！
+            </p>
+
+        {% else %}
+
+            <h2 class="result-page__tier-title">
+                まずは清潔感から！
+            </h2>
+
+            <p class="result-page__tier-desc">
+                髪型や服装、爪など、できるところから少しずつ整えてみましょう。
+                高価な服や特別なアイテムは必要ありません。
+                清潔感を意識するだけでも第一印象は変わります！
+            </p>
+
+        {% endif %}
+
+
+    <!-- デート・距離感編 -->
+
+    {% elif category == "date" %}
+
+        {% if points >= 18 %}
+
+            <h2 class="result-page__tier-title">
+                距離感の取り方がとても上手！
+            </h2>
+
+            <p class="result-page__tier-desc">
+                相手の気持ちを考えながら自然な距離感を作れるタイプです。
+                一緒にいて心地よいと思ってもらいやすそう。
+                デートでもその余裕を活かしていきましょう！
+            </p>
+
+        {% elif points >= 14 %}
+
+            <h2 class="result-page__tier-title">
+                デート力はかなり高め！
+            </h2>
+
+            <p class="result-page__tier-desc">
+                相手との距離感を意識して行動できています。
+                相手を急かさず、楽しい時間を作れるのが魅力です。
+                あとは少し積極性をプラスするとさらに良さそう！
+            </p>
+
+        {% elif points >= 10 %}
+
+            <h2 class="result-page__tier-title">
+                デート力はまだまだ伸びしろあり！
+            </h2>
+
+            <p class="result-page__tier-desc">
+                基本的な距離感はできています。
+                相手のペースを見ながら行動することを意識すると、
+                より自然で楽しいデートにつながりそうです！
+            </p>
+
+        {% else %}
+
+            <h2 class="result-page__tier-title">
+                まずは相手のペースを意識！
+            </h2>
+
+            <p class="result-page__tier-desc">
+                自分の気持ちだけで急がず、相手の反応を見ながら
+                少しずつ距離を縮めていきましょう。
+                焦らないことが、自然な関係を作るポイントです！
+            </p>
+
+        {% endif %}
+
+    <!-- メンタル・余裕編 -->
+
+    {% elif category == "mental" %}
+
+        {% if points >= 18 %}
+
+            <h2 class="result-page__tier-title">
+                精神的な余裕がかなり高い！
+            </h2>
+
+            <p class="result-page__tier-desc">
+                落ち着いて行動でき、自分の気持ちもしっかりコントロールできるタイプです。
+                相手に安心感を与えられる大きな魅力があります。
+                その余裕はかなりの強みです！
+            </p>
+
+        {% elif points >= 14 %}
+
+            <h2 class="result-page__tier-title">
+                かなり安定したタイプ！
+            </h2>
+
+            <p class="result-page__tier-desc">
+                相手に振り回されすぎず、自分のペースを保てています。
+                落ち着いた雰囲気が好印象につながりそうです。
+                もう少し自信を持てば、さらに魅力がアップ！
+            </p>
+
+        {% elif points >= 10 %}
+
+            <h2 class="result-page__tier-title">
+                まだまだ余裕を伸ばせそう！
+            </h2>
+
+            <p class="result-page__tier-desc">
+                基本的には落ち着いて行動できています。
+                焦ったときこそ一度落ち着いて、
+                自分のペースを大切にするとさらに良くなりそうです！
+            </p>
+
+        {% else %}
+
+            <h2 class="result-page__tier-title">
+                焦らず少しずつ！
+            </h2>
+
+            <p class="result-page__tier-desc">
+                相手の反応を気にしすぎず、自分らしくいることを意識してみましょう。
+                すぐに結果を求めなくても大丈夫。
+                落ち着いて行動することで、少しずつ余裕が生まれてきます！
+            </p>
+
+        {% endif %}
+
     {% endif %}
 
-    <div>
-        <a href="{% url 'index' %}" class=".result-page__back-link">一覧ページに戻る</a>
+    <div class="cta-area">
+        <a href="{% url 'index' %}" class="btn-primary">
+            一覧に戻る
+        </a>
     </div>
 </div>
 <svg width="0" height="0" style="position:absolute">
