@@ -165,25 +165,47 @@ body{
 
 /* 次へボタン、戻るボタン */
 
-.button-area{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  margin-top:16px;
+/* ---------- 次へボタン ---------- */
+#nextButton{
+  position:sticky;
+  bottom:16px;
+  width:100%;
+  margin-top:24px;
+  padding:16px 18px;
+  border:none;
+  border-radius:999px;
+  font-family:inherit;
+  font-size:16px;
+  font-weight:700;
+  color:var(--white);
+  background:linear-gradient(120deg, var(--blue-deep), var(--pink-deep));
+  box-shadow:0 14px 26px -12px rgba(255,143,168,0.55);
+  cursor:pointer;
+  transition:transform .12s ease, box-shadow .2s ease;
+  width: 40%;
 }
-
-#nextButton,
-#backButton {
-    width: 100%;
-    padding: 13px 18px;
-    border: none;
-    border-radius: 999px;
-    font-family: inherit;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--white);
-    background: linear-gradient(120deg, var(--blue-deep), var(--pink-deep));
-    cursor: pointer;
+#backButton{
+  position:sticky;
+  bottom:16px;
+  width:100%;
+  margin-top:24px;
+  padding:16px 18px;
+  border:none;
+  border-radius:999px;
+  font-family:inherit;
+  font-size:16px;
+  font-weight:700;
+  color:var(--white);
+  background:linear-gradient(120deg, var(--blue-deep), var(--pink-deep));
+  box-shadow:0 14px 26px -12px rgba(255,143,168,0.55);
+  cursor:pointer;
+  transition:transform .12s ease, box-shadow .2s ease;
+  width: 40%;
+}
+.button{
+    justify-content: center;
+    display: flex;
+    gap: 24px;
 }
 /* ---------- アクセシビリティ配慮 ---------- */
 @media (prefers-reduced-motion: reduce){
