@@ -50,74 +50,92 @@
         <button type="button" id="nextButton">次へ</button>
         <button type="button" id="backButton">戻る</button>
     </div>
-    
+
     <script>
         const questions = document.querySelectorAll(".question");
         const nextButton = document.getElementById("nextButton");
         const backButton = document.getElementById("backButton");
+        const message = document.getElementById("message");
     
         let currentQuestion = 0;
-
-        let totalPoints = 0;
+    
+        // 各問題のポイントを保存
+        let questionPoints = [];
     
         nextButton.addEventListener("click", function() {
     
-
             const selected = questions[currentQuestion].querySelector(
                 'input[type="radio"]:checked'
             );
-
-            const message = document.getElementById("message");
-
+    
+            // 回答が選ばれていない場合
             if (!selected) {
                 message.classList.add("show");
-
+    
                 setTimeout(function() {
                     message.classList.remove("show");
                 }, 2500);
-
+    
                 return;
             }
-
-            totalPoints += Number(selected.value);
-            
+    
+            // 現在の問題のポイントを保存
+            questionPoints[currentQuestion] = Number(selected.value);
+    
             // 現在の問題を非表示
             questions[currentQuestion].style.display = "none";
     
             // 次の問題へ
             currentQuestion++;
     
-            // 次の問題を表示
+            // まだ問題がある場合
             if (currentQuestion < questions.length) {
                 questions[currentQuestion].style.display = "block";
             }
-
-            
     
-            // 最後の問題ならボタンを結果にする
+            // 最後の問題なら「結果」
             if (currentQuestion === questions.length - 1) {
                 nextButton.textContent = "結果";
             }
     
-            // 結果ページに飛ぶ
+            // 結果ページへ
             if (currentQuestion >= questions.length) {
-                window.location.href = "/application/result/?points=" + totalPoints + "&category={{ category }}";
+    
+                // 全問題のポイントを合計
+                let totalPoints = 0;
+    
+                for (let i = 0; i < questionPoints.length; i++) {
+                    totalPoints += questionPoints[i] || 0;
+                }
+    
+                window.location.href =
+                    "/application/result/?points="
+                    + totalPoints
+                    + "&category={{ category }}";
             }
         });
-
-        backButton.addEventListener("click",function(){
-
+    
+    
+        backButton.addEventListener("click", function() {
+    
+            // 最初の問題ならトップページへ
             if (currentQuestion === 0) {
                 window.location.href = "/application/";
                 return;
             }
-
-            if(currentQuestion > 0){
-                questions[currentQuestion].style.display = "none";
-
-                currentQuestion--;
-
-                questions[currentQuestion].style.display = "block";
+    
+            // 現在の問題を非表示
+            questions[currentQuestion].style.display = "none";
+    
+            // 前の問題へ
+            currentQuestion--;
+    
+            // 前の問題を表示
+            questions[currentQuestion].style.display = "block";
+    
+            // 最後の問題から戻った場合は「次へ」に戻す
+            if (currentQuestion < questions.length - 1) {
+                nextButton.textContent = "次へ";
             }
         });
     </script>
