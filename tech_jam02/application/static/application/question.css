@@ -25,7 +25,6 @@ body {
 body {
     min-height: 100vh;
     padding: 28px 16px;
-
     font-family: 'Zen Kaku Gothic New', sans-serif;
     color: var(--ink);
 
@@ -45,7 +44,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-
     overflow-x: hidden;
 }
 
@@ -55,13 +53,10 @@ body {
 .question-page {
     width: 100%;
     max-width: 390px;
-
     margin: 0 auto;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-
     text-align: center;
 }
 
@@ -72,7 +67,6 @@ body {
     font-family: 'Kiwi Maru', serif;
     font-size: 38px;
     margin: 0 0 8px;
-
     color: var(--ink);
 }
 
@@ -80,7 +74,6 @@ body {
 .question-page__subtitle {
     font-size: 14px;
     color: var(--ink-soft);
-
     margin: 0 0 28px;
 }
 
@@ -89,33 +82,23 @@ body {
 
 .question-page__options {
     width: 100%;
-
     display: flex;
     flex-direction: column;
-
     gap: 12px;
 }
 
 
 .question-option {
     width: 100%;
-
     display: flex;
     align-items: center;
-
     padding: 16px 18px;
-
     border: 1.6px solid var(--blue-soft);
     border-radius: 16px;
-
     background: var(--white);
-
     color: var(--ink);
-
     text-decoration: none;
-
     text-align: left;
-
     transition:
         background .2s ease,
         border-color .2s ease,
@@ -128,21 +111,15 @@ body {
 
 .question-option__number {
     flex-shrink: 0;
-
     width: 30px;
     height: 30px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     margin-right: 12px;
-
     border-radius: 50%;
-
     background: var(--blue-soft);
     color: var(--blue-deep);
-
     font-size: 12px;
     font-weight: 700;
 }
@@ -161,9 +138,7 @@ body {
 .question-option:hover {
     background: var(--blue-pale);
     border-color: var(--blue-deep);
-
     box-shadow: 0 8px 20px -12px rgba(57, 180, 217, 0.5);
-
     transform: translateY(-2px);
 }
 
@@ -179,9 +154,7 @@ body {
 
 .question-page__note {
     font-size: 12px;
-
     color: var(--ink-soft);
-
     margin: 20px 0 0;
 }
 
